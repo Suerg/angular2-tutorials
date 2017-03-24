@@ -2,4 +2,14 @@
   {{name}} - {{show}}
 </div>
 
-<input type="button" (click)="changeShow()" value="Change me"/> 
+<input type="button" (click)="changeShow()" value="Change me"/>
+
+<div *ngFor="let item of myNumbers; let i=index">
+  <b>{{i+1}})</b> This my number: {{item}}
+</div>
+
+<div *ngFor="let item of myPersons; let i=index">
+  <b>{{i+1}})</b> name: {{item.name}} and number is: {{checkNumber(item.number)}}
+</div>
+
+<input type="button" (click)="createOrder()" value="create order" />
