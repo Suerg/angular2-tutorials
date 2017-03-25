@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { MarketComponent } from './market/market.component';
 import { CollectionComponent } from './collection/collection.component';
 
+import { CollectableService } from './shared/collectable.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,7 @@ import { CollectionComponent } from './collection/collection.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [CollectableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
