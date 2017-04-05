@@ -9,8 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var posts_service_1 = require('../services/posts.service');
 var UserComponent = (function () {
-    function UserComponent() {
+    function UserComponent(postsService) {
+        var _this = this;
+        this.postsService = postsService;
         this.name = 'John Doe';
         this.email = 'john@gmail.com';
         this.address = {
@@ -20,16 +23,28 @@ var UserComponent = (function () {
         };
         this.hobbies = ['Music', 'Movies', 'Sports'];
         this.showHobbies = false;
+        this.postsService.getPosts().subscribe(function (posts) {
+            _this.posts = posts;
+        });
     }
     UserComponent.prototype.toggleHobbies = function () {
         this.showHobbies = !this.showHobbies;
     };
+    UserComponent.prototype.addHobby = function (hobby) {
+        console.log(hobby);
+        this.hobbies.push(hobby);
+    };
+    UserComponent.prototype.deleteHobby = function (i) {
+        this.hobbies.splice(i, 1);
+    };
     UserComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'user',
-            template: "\n  <h1>\n    Hello {{name}}\n  </h1>\n  <p>Email: {{email}}</p>\n  <p>\n  <strong>\n    Address:\n  </strong>\n    {{address.street}}\n    {{address.city}}\n    {{address.state}}\n  </p>\n  <button (click)=\"toggleHobbies()\">\n    Show Hobbies\n  </button>\n  <div *ngIf=\"showHobbies\">\n    <h3>Hobbies</h3>\n    <ul>\n      <li *ngFor=\"let hobby of hobbies\">\n        {{hobby}}\n      </li>\n    </ul>\n  </div>\n  ",
+            templateUrl: 'user.component.html',
+            providers: [posts_service_1.PostsService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [posts_service_1.PostsService])
     ], UserComponent);
     return UserComponent;
 }());
